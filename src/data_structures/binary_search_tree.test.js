@@ -296,6 +296,29 @@ dataStructures.forEach((TargetDS) => {
         });
 
         it("can remove a node with both children, where the successor is the node's right child", () => {
+          const records = [
+            { key: 1, value: "first" },
+            { key: 3, value: "second" },
+            { key: 2, value: "third" },
+            { key: 5, value: "fourth" },
+            { key: 4, value: "fifth" },
+            { key: 6, value: "sixth" },
+          ];
+          fill(records);
+
+          bst.delete(3);
+          expect(bst.count()).toBe(5);
+
+          expect(bst.lookup(3)).toBe(undefined);
+
+          const keys = [1, 2, 4, 5, 6];
+          let i = 0;
+
+          bst.forEach(({ key, _value }) => {
+            expect(key).not.toBe(3);
+            expect(keys[i]).toBe(key);
+            i++;
+          });
         });
 
         it("can remove a node with both children, where the successor is not the node's right child", () => {
